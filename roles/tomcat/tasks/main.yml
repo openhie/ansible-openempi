@@ -1,0 +1,12 @@
+---  
+- name:  Install Tomcat
+  apt: name={{ item }} state=installed
+  with_items:
+    - tomcat7
+
+- name: Enable Tomcat Service
+  service: name=tomcat7 state=started enabled=yes
+
+- name: Create .OpenMRS directory
+  file: path=/usr/share/tomcat7/.OpenMRS state=directory group=tomcat7 owner=tomcat7 recurse=yes
+

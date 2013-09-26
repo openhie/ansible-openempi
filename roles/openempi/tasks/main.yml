@@ -1,0 +1,3 @@
+---  
+- name: Download OpenMRS war
+  get_url: dest=/var/lib/tomcat7/webapps/openmrs.war url=http://softlayer-dal.dl.sourceforge.net/project/openmrs/releases/OpenMRS_1.9.4/openmrs.war owner=tomcat7 group=tomcat7

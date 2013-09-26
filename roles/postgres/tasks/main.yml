@@ -1,0 +1,19 @@
+---  
+- name:  Install Postgres
+  apt: name={{ item }} state=installed
+  with_items:
+    - postgresql-9.1
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+
+- name: Create openempi DB user
+  postgresql_user: state=present name=openempi password={{ dbuserpwd }}
+
+- name: Create openempi DB
+  postgresql_db: name=openempi state=present owner=openempi
+
+- name: Modify pg_hba.conf
+  file:
+  notify: restart postgres
+

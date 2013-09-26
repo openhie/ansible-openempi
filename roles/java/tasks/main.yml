@@ -1,0 +1,6 @@
+---  
+ - name:  Install OpenJDK JRE 7
+   apt: update_cache=yes name={{ item }} state=installed
+   with_items:
+    - openjdk-7-jre-headless
+

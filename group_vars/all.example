@@ -1,0 +1,4 @@
+---
+# Set mysql root password
+mysqlrootpwd: password
+
