@@ -1,3 +1,6 @@
 ---  
-- name: Download OpenMRS war
-  get_url: dest=/var/lib/tomcat7/webapps/openmrs.war url=http://softlayer-dal.dl.sourceforge.net/project/openmrs/releases/OpenMRS_1.9.4/openmrs.war owner=tomcat7 group=tomcat7
+- name: Download openempi
+  get_url: dest=/tmp url=https://kenai.com/projects/openempi/downloads/download/openempi-2.2.7-openempi.tar.gz
+
+- name: extract openempi to /opt
+  command: chdir=/opt creates=/opt/openempi-2.2.7 tar xzf /tmp/openempi-2.2.7-openempi.tar.gz -C /opt

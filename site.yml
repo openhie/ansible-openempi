@@ -5,6 +5,6 @@
 
   roles:
     - java
+    - postgres
     - tomcat
-    - mysql
-    - openmrs
+    - openempi

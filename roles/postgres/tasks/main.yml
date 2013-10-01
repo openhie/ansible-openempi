@@ -7,13 +7,8 @@
     - libpq-dev
     - python-psycopg2
 
-- name: Create openempi DB user
-  postgresql_user: state=present name=openempi password={{ dbuserpwd }}
-
-- name: Create openempi DB
-  postgresql_db: name=openempi state=present owner=openempi
-
 - name: Modify pg_hba.conf
-  file:
+  template: src=pg_hba.conf dest=/etc/postgresql/9.1/main/pg_hba.conf
   notify: restart postgres
 
+- include: postgres.yml
