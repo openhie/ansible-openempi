@@ -1,0 +1,10 @@
+---
+- sudo: yes
+  sudo_user: postgres
+
+  tasks:
+  - name: Create openempi DB user
+    postgresql_user: state=present name=openempi password={{ dbuserpwd }}
+
+  - name: Create openempi DB
+    postgresql_db: name=openempi state=present owner=openempi
