@@ -10,5 +10,3 @@
 - name: Modify pg_hba.conf
   template: src=pg_hba.conf dest=/etc/postgresql/9.1/main/pg_hba.conf
   notify: restart postgres
-
-- include: postgres.yml

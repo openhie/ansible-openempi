@@ -8,3 +8,12 @@
     - postgres
     - tomcat
     - openempi
+
+- name: Configure server
+  hosts: servers
+  user: root
+  sudo: yes
+  sudo_user: postgres
+  
+  roles:
+     - postsetup

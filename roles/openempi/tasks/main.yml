@@ -1,6 +1,15 @@
 ---  
 - name: Download openempi
-  get_url: dest=/tmp url=https://kenai.com/projects/openempi/downloads/download/openempi-2.2.7-openempi.tar.gz
+  get_url: dest=/tmp url=https://kenai.com/projects/openempi/downloads/download/openempi-{{ openempi_version }}-openempi.tar.gz
 
 - name: extract openempi to /opt
-  command: chdir=/opt creates=/opt/openempi-2.2.7 tar xzf /tmp/openempi-2.2.7-openempi.tar.gz -C /opt
+  command: chdir=/opt creates=/opt/openempi-{{ openempi_version }} tar xzf /tmp/openempi-{{ openempi_version }}-openempi.tar.gz -C /opt
+
+- name: Set permissions on openempi directory to tomcat
+  file: path=/opt/openempi-{{ openempi_version }} owner=tomcat7 group=tomcat7 recurse=yes state=directory
+
+- name: Deploy war and rename to openempi.war
+  command: cp /opt/openempi-{{ openempi_version }}/openempi-webapp-web-{{ openempi_version }}.war /var/lib/tomcat7/webapps/openempi.war
+
+- name: Set permissions on war file
+  file: path=/var/lib/tomcat7/webapps/openempi.war owner=tomcat7 group=tomcat7
