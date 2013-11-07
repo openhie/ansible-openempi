@@ -4,6 +4,10 @@
   with_items:
     - tomcat7
 
+- name: Configure tomcat to work with openempi
+  template: src=tomcat7 dest=/etc/init.d/tomcat7 mode=0755 
+  notify: Restart Tomcat
+
 - name: Enable Tomcat Service
   service: name=tomcat7 state=started enabled=yes
 

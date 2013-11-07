@@ -1,5 +1,5 @@
 ---
 # Set mysql root password
-mysqlrootpwd: password
+dbuserpwd: password
 # Version of openempi to use
 openempi_version: 2.2.7
