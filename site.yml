@@ -17,3 +17,10 @@
   
   roles:
      - postsetup
+
+- name: Configure Database
+  hosts: servers
+  user: root
+
+  roles: 
+     - dbsetup

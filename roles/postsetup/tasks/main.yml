@@ -5,5 +5,3 @@
 - name: Create openempi DB
   postgresql_db: name=openempi state=present owner=openempi
 
-- name: Run DB scripts
-  script:  updatedb.sh

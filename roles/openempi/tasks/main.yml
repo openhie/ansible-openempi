@@ -5,6 +5,9 @@
 - name: extract openempi to /opt
   command: chdir=/opt creates=/opt/openempi-{{ openempi_version }} tar xzf /tmp/openempi-{{ openempi_version }}-openempi.tar.gz -C /opt
 
+- name: Insert jdbc.properties
+  template: src=jdbc.properties dest=/opt/openempi-{{ openempi_version }}/conf
+
 - name: Set permissions on openempi directory to tomcat
   file: path=/opt/openempi-{{ openempi_version }} owner=tomcat7 group=tomcat7 recurse=yes state=directory
 
