@@ -1,4 +1,4 @@
----
+--
 - name: Set pgpass to run scripts
   template: src=pgpass dest=~/.pgpass mode=0600
 
@@ -6,4 +6,4 @@
   script:  dbsetup.sh
 
 - name: Remove pgpass
-  file: src=~/.pgpass state=absent
+  file: path=~/.pgpass state=absent
