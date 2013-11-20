@@ -1,4 +1,4 @@
---
+---
 - name: Set pgpass to run scripts
   template: src=pgpass dest=~/.pgpass mode=0600
 
