@@ -9,7 +9,7 @@
   template: src=jdbc.properties dest=/opt/openempi-{{ openempi_version }}/conf
 
 - name: Insert mpi-config.xml
-  file: path=/opt/openempi-{{ openempi_version }}/conf src=mpi-config.xml owner=tomcat7 group=tomcat7
+  file: path=/opt/openempi-{{ openempi_version }}/conf/mpi-config.xml src=mpi-config.xml owner=tomcat7 group=tomcat7
 
 - name: Set permissions on openempi directory to tomcat
   file: path=/opt/openempi-{{ openempi_version }} owner=tomcat7 group=tomcat7 recurse=yes state=directory

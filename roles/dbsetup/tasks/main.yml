@@ -4,6 +4,8 @@
 
 - name: Run DB scripts
   script:  dbsetup.sh
+  notify: restart tomcat7
 
 - name: Remove pgpass
   file: path=~/.pgpass state=absent
+
