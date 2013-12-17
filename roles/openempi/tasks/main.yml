@@ -8,11 +8,18 @@
 - name: Insert jdbc.properties
   template: src=jdbc.properties dest=/opt/openempi-{{ openempi_version }}/conf
 
+- name: Insert mpi-config.xml
+  file: path=/opt/openempi-{{ openempi_version }}/conf src=mpi-config.xml owner=tomcat7 group=tomcat7
+
 - name: Set permissions on openempi directory to tomcat
   file: path=/opt/openempi-{{ openempi_version }} owner=tomcat7 group=tomcat7 recurse=yes state=directory
 
 - name: Deploy war and rename to openempi.war
-  command: cp /opt/openempi-{{ openempi_version }}/openempi-webapp-web-{{ openempi_version }}.war /var/lib/tomcat7/webapps/openempi.war
+  command: cp /opt/openempi-{{ openempi_version }}/openempi-webapp-web-{{ openempi_version }}.war /var/lib/tomcat7/webapps/openempi-admin.war
 
 - name: Set permissions on war file
-  file: path=/var/lib/tomcat7/webapps/openempi.war owner=tomcat7 group=tomcat7
+  file: path=/var/lib/tomcat7/webapps/openempi-admin.war owner=tomcat7 group=tomcat7
+
+- name: Create fileRepository directory
+  file: path=/var/lib/tomcat7/fileRepository owner=tomcat7 group=tomcat7 recurse=yes state=directory
+
