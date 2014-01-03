@@ -27,4 +27,4 @@ Drop the -k if you are logging in with a public/private key.
 
 `ansible-playbook -i hosts site.yml`
 
-After this is complete your point your browser to http://ip_or_hostname:8080/openempi-admin.  The default login is admin/admin.
+After this is complete point your browser to http://ip_or_hostname:8080/openempi-admin.  The default login is admin/admin.
