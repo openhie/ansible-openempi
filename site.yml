@@ -4,6 +4,7 @@
   user: root
 
   roles:
+#    - bootstrap
     - java
     - postgres
     - tomcat

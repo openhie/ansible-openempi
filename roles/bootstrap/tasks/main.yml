@@ -1,0 +1,3 @@
+---
+- name: Bootstrap ansible requirements
+  raw: apt-get update; apt-get install -y python-apt aptitude python-keyczar
