@@ -2,6 +2,7 @@
 - name: Setup server
   hosts: servers
   user: root
+#sudo:yes
 
   roles:
 #    - bootstrap
