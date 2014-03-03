@@ -11,18 +11,12 @@
     - tomcat
     - openempi
 
-- name: Configure server
+- name: Configure DB
   hosts: servers
   user: root
   sudo: yes
   sudo_user: postgres
+  gather_facts: no
   
   roles:
-     - postsetup
-
-- name: Configure Database
-  hosts: servers
-  user: root
-
-  roles: 
-     - dbsetup
+     - openempi-db
