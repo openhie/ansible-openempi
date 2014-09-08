@@ -1,0 +1,74 @@
+# Set up the DB
+- name: Create "{{openempi_db_name}}" DB
+  sudo_user: postgres
+  postgresql_db: name={{openempi_db_name}}
+                 encoding='UTF-8'
+  register: openempi_db_created
+  tags: ['openempi']
+
+- name: Create user "{{openempi_db_user}}"
+  sudo_user: postgres
+  postgresql_user: user={{openempi_db_user}}
+                   db={{openempi_db_name}}
+                   password={{openempi_db_password}}
+                   priv=ALL
+                   role_attr_flags=SUPERUSER
+  tags: ['openempi']
+
+- name: Insert pgpass
+  template: src=pgpass.j2
+            dest=~/.pgpass
+            mode=0600
+#  when: openempi_db_created|changed
+
+- name: Create new database schema
+  shell: chdir={{openempi_install_dir}}/conf
+         psql -h localhost -w -U openempi -d openempi -f create_new_database_schema-3.0.0.sql &&
+         psql -h localhost -w -U openempi -d openempi -f create_person_entity_model_definition.sql &&
+         psql -h localhost -w -U openempi -d openempi -f create_person_reference_tables.sql
+#  when: openempi_db_created|changed  # shouldn't run scripts when db is already created, to prevent wipe of DB.
+
+- name: Remove pgpass
+  file: path=~/.pgpass
+        state=absent
+#  when: openempi_db_created|changed
+
+# Configure tomcat
+
+- name: Insert setenv.sh
+  template: src=setenv.sh
+            dest={{openempi_tomcat_dir}}/bin/
+
+- name: create user {{openempi_user}}
+  user: name={{openempi_user}}
+        state=present
+        createhome=no
+        home={{openempi_install_dir}}
+  notify: lock user
+
+- name: Link {{openempi_version}} to openempi-admin.war
+  file: path={{openempi_tomcat_dir}}/webapps/openempi-admin.war
+        src={{openempi_install_dir}}/openempi-entity-webapp-web-{{openempi_version}}.war
+        state=link
+
+- name: Create directoris in openempi
+  file: path={{item}}
+        state=directory
+  with_items:
+   - "{{openempi_install_dir}}/data"
+   - "{{openempi_install_dir}}/fileRepository"
+
+- name: Insert basic mpi-config.xml
+  template: src=mpi-config.xml
+            dest={{openempi_install_dir}}/conf/mpi-config.xml
+
+- name: Set permissions on {{openempi_install_dir}} and {{tomcat_install_dir}}
+  file: path={{item}}
+        state=directory
+        owner={{openempi_user}}
+        group={{openempi_user}}
+        recurse=yes
+  with_items:
+   - "{{openempi_install_dir}}"
+   - "{{openempi_tomcat_dir}}"
+

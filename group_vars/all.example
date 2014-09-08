@@ -1,5 +1,0 @@
----
-# Set postgres db password for openempi user
-dbuserpwd: password
-# Version of openempi to use
-openempi_version: 2.2.7

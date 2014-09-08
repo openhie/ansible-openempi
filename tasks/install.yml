@@ -1,0 +1,16 @@
+- name: Download OpenEMPI distribution
+  get_url: url={{openempi_download_url}}
+           dest=/tmp/
+  tags: ['openempi']
+
+- name: Extract OpenEMPI
+  unarchive: copy=no
+             creates={{openempi_install_dir}}/conf
+             dest=/tmp/
+             src=/tmp/openempi-entity-{{openempi_version}}-openempi-entity.tar.gz
+  tags: ['openempi']
+
+- name: Move OpenEMPI to {{openempi_install_dir}}
+  shell: 'creates={{openempi_install_dir}}/conf chdir=/tmp mv openempi-entity-{{openempi_version}}/* {{openempi_install_dir}}'
+  tags: ['openempi']
+

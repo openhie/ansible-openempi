@@ -1,5 +1,4 @@
-hosts
-group_vars/all
+test/
 
 ## OSX
 .DS_Store

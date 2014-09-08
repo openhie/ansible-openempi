@@ -1,0 +1,6 @@
+---
+- name: lock user
+  shell: passwd -l {{openempi_user}}
+
+- name: restart tomcat
+  service: name={{tomcat_service}} state=restarted

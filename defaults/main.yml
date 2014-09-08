@@ -1,11 +1,4 @@
-Role Name
-========
-
-openempi
-
-Role Variables
---------------
-```
+---
 openempi_install_dir: /opt/openempi
 openempi_version: 3.0.0-beta
 openempi_download_url: https://kenai.com/projects/openempi/downloads/download/openempi-entity-{{openempi_version}}-openempi-entity.tar.gz
@@ -23,30 +16,4 @@ openempi_db_name: openempi
 openempi_db_user: openempi
 openempi_db_password: "openempi"
 
-```
 
-Example Playbook
--------------------------
-### playbook.yml
-
-```
-
----
-- hosts: all
-  roles:
-  - yatesr.java-standalone
-  - yatesr.tomcat-standalone
-  - yatesr.ohie-cr
-
-
-```
-
-License
--------
-
-Apache 2.0
-
-Author Information
-------------------
-
-Ryan Yates

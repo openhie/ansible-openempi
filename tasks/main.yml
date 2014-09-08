@@ -1,0 +1,17 @@
+---
+- name: Create {{openempi_install_dir}}
+  file: path={{openempi_install_dir}}
+        state=directory
+  tags: ['openempi']
+
+- stat: path="{{openempi_install_dir}}/conf"
+  register: is_openempi_installed
+  
+
+# Install OpenEMPI
+- include: install.yml
+  when: is_openempi_installed.stat.isdir is not defined 
+
+# Configure OpenEMPI
+- include: config.yml
+
