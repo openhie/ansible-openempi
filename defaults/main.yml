@@ -15,5 +15,8 @@ tomcat_service: tomcat_standalone
 openempi_db_name: openempi
 openempi_db_user: openempi
 openempi_db_password: "openempi"
-
+# Use a local packaged tar.gz to deploy openempi
+openepmi_deploy: false
+# Location of archive to use if above is set to true
+openempi_archive_loc: 
 

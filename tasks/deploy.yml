@@ -1,9 +1,5 @@
-- name: Stop tomcat
-  service: name=tomcat state=stopped
-  tags: ['openempi-deploy']
+- name: Deploy openempi archive
+  unarchive: copy=yes
+             dest={{openempi_install_dir}}
+             src={{openempi_archive_loc}}
 
-- name: Clean up current deployment
-  file: path={{item}}
-        state=absent
-  with_fileglob:
-   - openempi-admin*

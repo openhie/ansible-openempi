@@ -1,0 +1,17 @@
+- name: Stop tomcat
+  service: name={{tomcat_service}} state=stopped
+  ignore_errors: yes
+
+- name: Clean up current deployment in {{tomcat_install_dir}}
+  shell: "rm -rf {{tomcat_install_dir}}/webapps/openempi-admin*"
+
+- name: Purge {{openempi_install_dir}} 
+  file: path={{openempi_install_dir}}
+        state=absent
+        
+- name: Drop openempi database
+  sudo_user: postgres
+  postgresql_db: name={{openempi_db_name}}
+                 state=absent
+
+

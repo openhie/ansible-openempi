@@ -1,4 +1,7 @@
 ---
+- include: cleanup.yml
+  when: openempi_deploy
+
 - name: Create {{openempi_install_dir}}
   file: path={{openempi_install_dir}}
         state=directory
@@ -7,10 +10,13 @@
 - stat: path="{{openempi_install_dir}}/conf"
   register: is_openempi_installed
   
-
 # Install OpenEMPI
 - include: install.yml
-  when: is_openempi_installed.stat.isdir is not defined 
+  when: is_openempi_installed.stat.isdir is not defined
+
+# Deploy OpenEMPI
+- include: deploy.yml
+  when: openempi_deploy
 
 # Configure OpenEMPI
 - include: config.yml
