@@ -1,5 +1,5 @@
 - name: Deploy openempi archive
   unarchive: copy=yes
              dest={{openempi_install_dir}}
-             src={{openmpi_archive_loc}}
+             src={{openempi_archive_loc}}
 
