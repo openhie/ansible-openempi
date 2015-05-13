@@ -1,7 +1,8 @@
 ---
 openempi_install_dir: /opt/openempi
-openempi_version: 3.0.0-beta
-openempi_download_url: https://kenai.com/projects/openempi/downloads/download/openempi-entity-{{openempi_version}}-openempi-entity.tar.gz
+openempi_version: 3.0.0
+# Default download is for the 3.0.0 entity version
+openempi_download_url: "http://www.openempi.org/openempi-downloads/file_download/?username=odysseas@sysnetint.com&filename=openempi-entity-{{openempi_version}}-openempi-entity.tar.gz"
 # Default is for use with yatesr.tomcat-standalone role
 openempi_tomcat_dir: "{{tomcat_install_dir}}/apache-tomcat-{{tomcat_version}}"
 openempi_java_opts: "-Xms1024m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=356m -XX:PermSize=256m -XX:MaxPermSize=356m"
